@@ -21,7 +21,7 @@ public class SaleController {
     /*
         GET /sales/1
      */
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/{id}")  //ok
     public ResponseEntity<SaleMinDTO> findById(@PathVariable Long id) {
         SaleMinDTO dto = saleService.findById(id);
         return ResponseEntity.ok(dto);
@@ -31,7 +31,7 @@ public class SaleController {
         Sumário de vendas por vendedor (teste 1) add valores default
         GET /sales/summary?minDate=2022-01-01&maxDate=2022-06-30
      */
-    @GetMapping("/summary")
+    @GetMapping("/summary") //ok
     public List<SellerSalesDTO> getTotalSalesBySellerAndDateRange(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate minDate,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate maxDate) {
@@ -43,7 +43,7 @@ public class SaleController {
         GET /sales/summary
         Deverá retornar o sumário de vendas por vendedor dos últimos 12 meses.
      */
-    @GetMapping("/sales-summary")
+    @GetMapping("/sales-summary") //ok
     public List<SalesSummaryDTO> getSalesSummary() {
         //LocalDate date = LocalDate.now().minusMonths(15); range no banco com os dados
         //Último ano não pega nenhuma data (setar 2 últimos anos)
@@ -54,7 +54,7 @@ public class SaleController {
        Relatório de vendas (teste 1)
        GET /sales/report
     */
-    @GetMapping("/report")
+    @GetMapping("/report") //ok
     public List<SalesReportGeralDTO> getSalesReport() {
         return saleService.getSalesReport();
     }
