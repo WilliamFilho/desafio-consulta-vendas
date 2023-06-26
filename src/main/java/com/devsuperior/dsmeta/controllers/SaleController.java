@@ -31,7 +31,7 @@ public class SaleController {
     }
 
     /*
-        Sumário de vendas por vendedor (teste 1)
+        Sumário de vendas por vendedor (teste 1) add valores default
         GET /sales/summary?minDate=2022-01-01&maxDate=2022-06-30
      */
     @GetMapping("/summary")
@@ -48,8 +48,9 @@ public class SaleController {
      */
     @GetMapping("/sales-summary")
     public List<SalesSummaryDTO> getSalesSummary() {
-        LocalDate date = LocalDate.now().minusMonths(15);
-        return saleRepository.getSalesSummary(date);
+        //LocalDate date = LocalDate.now().minusMonths(15); range no banco com os dados
+        //Último ano não pega nenhuma data (setar 2 últimos anos)
+        return saleService.getSalesSummary();
     }
 
     /*
@@ -59,7 +60,7 @@ public class SaleController {
 
 
     /*
-        Relatório de vendas (teste 2)
+        Relatório de vendas (teste 2) tirar agrupamento (Lembrar **** igualar com o do Prof)
         GET /sales/report?minDate=2022-05-01&maxDate=2022-05-31&name=odinson (Agrupado por vendedor)
    */
     @GetMapping("/sales/report")
