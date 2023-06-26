@@ -3,6 +3,7 @@ package com.devsuperior.dsmeta.services;
 import com.devsuperior.dsmeta.entities.Sale;
 import com.devsuperior.dsmeta.entities.dto.SaleMinDTO;
 import com.devsuperior.dsmeta.entities.dto.SalesReportDTO;
+import com.devsuperior.dsmeta.entities.dto.SalesReportGeralDTO;
 import com.devsuperior.dsmeta.entities.dto.SalesSummaryDTO;
 import com.devsuperior.dsmeta.repositories.SaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,5 +46,21 @@ public class SaleService {
         LocalDate minD = minDate != null ? minDate : today;
         LocalDate maxD = maxDate != null ? maxDate : today.minusYears(1L);
         return saleRepository.getSalesReport(minD, maxD, name != null ? name : "");
+    }
+
+    public List<SalesReportGeralDTO> getSalesReport() {
+        LocalDate startDate = LocalDate.now().minusMonths(15);
+        List<Sale> salesList = saleRepository.findByDateGreaterThanEqual(startDate);
+        List<SalesReportGeralDTO> reportList = new ArrayList<>();
+        for (Sale sales : salesList) {
+            SalesReportGeralDTO report = new SalesReportGeralDTO();
+            report.setAmount(sales.getAmount());
+            report.setDate(sales.getDate());
+            report.setDeals(sales.getDeals());
+            report.setSellerName(sales.getSeller().getName());
+            report.setVisited(sales.getVisited());
+            reportList.add(report);
+        }
+        return reportList;
     }
 }

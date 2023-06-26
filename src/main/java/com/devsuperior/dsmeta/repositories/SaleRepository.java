@@ -2,6 +2,7 @@ package com.devsuperior.dsmeta.repositories;
 
 import com.devsuperior.dsmeta.entities.Sale;
 import com.devsuperior.dsmeta.entities.dto.SalesReportDTO;
+import com.devsuperior.dsmeta.entities.dto.SalesReportGeralDTO;
 import com.devsuperior.dsmeta.entities.dto.SalesSummaryDTO;
 import com.devsuperior.dsmeta.entities.dto.SellerSalesDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -28,4 +29,6 @@ public interface SaleRepository extends JpaRepository<Sale, Long> {
 
     @Query("SELECT new com.devsuperior.dsmeta.entities.dto.SalesReportDTO(s.name, MIN(sales.date), MAX(sales.date), SUM(sales.amount)) FROM Sale sales INNER JOIN sales.seller s WHERE sales.date >= :minDate AND sales.date <= :maxDate AND LOWER(s.name) LIKE LOWER(CONCAT ('%',:name,'%')) GROUP BY s.name")
     List<SalesReportDTO> getSalesReport(@Param("minDate") LocalDate minDate, @Param("maxDate") LocalDate maxDate, @Param("name") String name);
+
+    List<Sale> findByDateGreaterThanEqual(LocalDate startDate);
 }

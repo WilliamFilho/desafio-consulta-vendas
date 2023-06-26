@@ -2,6 +2,7 @@ package com.devsuperior.dsmeta.entities.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.hibernate.property.access.spi.Setter;
 
 import java.time.LocalDate;
 @AllArgsConstructor

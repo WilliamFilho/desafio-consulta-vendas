@@ -1,9 +1,6 @@
 package com.devsuperior.dsmeta.controllers;
 
-import com.devsuperior.dsmeta.entities.dto.SaleMinDTO;
-import com.devsuperior.dsmeta.entities.dto.SalesReportDTO;
-import com.devsuperior.dsmeta.entities.dto.SalesSummaryDTO;
-import com.devsuperior.dsmeta.entities.dto.SellerSalesDTO;
+import com.devsuperior.dsmeta.entities.dto.*;
 import com.devsuperior.dsmeta.repositories.SaleRepository;
 import com.devsuperior.dsmeta.services.SaleService;
 import lombok.AllArgsConstructor;
@@ -57,7 +54,10 @@ public class SaleController {
        Relatório de vendas (teste 1)
        GET /sales/report
     */
-
+    @GetMapping("/report")
+    public List<SalesReportGeralDTO> getSalesReport() {
+        return saleService.getSalesReport();
+    }
 
     /*
         Relatório de vendas (teste 2) tirar agrupamento (Lembrar **** igualar com o do Prof)
