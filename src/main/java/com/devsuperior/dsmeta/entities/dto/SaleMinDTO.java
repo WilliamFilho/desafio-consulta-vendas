@@ -1,8 +1,8 @@
-package com.devsuperior.dsmeta.dto;
-
-import java.time.LocalDate;
+package com.devsuperior.dsmeta.entities.dto;
 
 import com.devsuperior.dsmeta.entities.Sale;
+
+import java.time.LocalDate;
 
 public class SaleMinDTO {
 

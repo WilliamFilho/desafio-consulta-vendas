@@ -1,6 +1,5 @@
 package com.devsuperior.dsmeta.entities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -13,25 +12,26 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tb_seller")
 public class Seller {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
 	private String email;
+	private String name;
 	private String phone;
-	
 	@OneToMany(mappedBy = "seller")
-	private List<Sale> sales = new ArrayList<>();
-	
+	private List<Sale> sales;
+	// constructor, getters and setters
+
+
 	public Seller() {
 	}
 
-	public Seller(Long id, String name, String email, String phone) {
+	public Seller(Long id, String email, String name, String phone, List<Sale> sales) {
 		this.id = id;
-		this.name = name;
 		this.email = email;
+		this.name = name;
 		this.phone = phone;
+		this.sales = sales;
 	}
 
 	public Long getId() {
@@ -42,20 +42,20 @@ public class Seller {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPhone() {
@@ -68,5 +68,9 @@ public class Seller {
 
 	public List<Sale> getSales() {
 		return sales;
-	}	
+	}
+
+	public void setSales(List<Sale> sales) {
+		this.sales = sales;
+	}
 }
